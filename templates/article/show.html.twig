@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.titre }}{% endblock %}
+
+{% block body %}
+<div>
+    <h1>{{ article.titre }}</h1>
+    <p>{{ article.contenu }}</p>
+
+    <h2>Comments</h2>
+    {% for comment in comments %}
+        <div>
+            <p><strong>{{ comment.username }}</strong> said:</p>
+            <p>{{ comment.content }}</p>
+        </div>
+    {% else %}
+        <p>No comments yet. Be the first to comment!</p>
+    {% endfor %}
+    {{ form_start(comment_form) }}
+    {{ form_widget(comment_form) }}
+    <button type="submit">{{ button_label|default('Submit Comment') }}</button>
+    {{ form_end(comment_form) }}
+</div>
+{% endblock %}

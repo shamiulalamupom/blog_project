@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>This is TechBiz</h1>
+
+    {% for article in articles %}
+        <div>
+            <h2>{{ article.titre }}</h2>
+            <p>{{ article.contenu }}</p>
+        </div>
+    {% endfor %}
+
+    This friendly message is coming from: shamiulalamupom
+</div>
+{% endblock %}
