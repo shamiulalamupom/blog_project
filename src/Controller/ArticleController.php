@@ -14,7 +14,7 @@ use App\Form\CommentType;
 
 final class ArticleController extends AbstractController
 {
-    #[Route('/article/{id}', name: 'app_article', methods: ['GET', 'POST'])]
+    #[Route('/article/{id}', name: 'app_article_show', methods: ['GET', 'POST'])]
     public function index(Article $article, Comment $comment, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = new Comment();
