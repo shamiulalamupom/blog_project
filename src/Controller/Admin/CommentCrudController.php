@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Article;
+use App\Entity\Comment;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -10,21 +10,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
-class ArticleCrudController extends AbstractCrudController
+class CommentCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Article::class;
+        return Comment::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('titre'),
-            TextEditorField::new('contenu'),
+            TextField::new('username'),
+            TextEditorField::new('content'),
             DateTimeField::new('createdAt')->hideOnForm(),
-            AssociationField::new('catagories')->autoComplete(),
+            AssociationField::new('article')->autoComplete(),
         ];
     }
 }
