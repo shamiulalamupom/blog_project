@@ -2,10 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[ApiResource(
+    normalizationContext: ['groups' => ['comment:read']],
+    operations: [
+        new GetCollection(),
+        new Get(),
+    ]
+)]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -13,18 +24,23 @@ class Comment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['comment:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['comment:read'])]
     private ?string $content = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['comment:read'])]
     private ?string $username = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    #[Groups(['comment:read'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[Groups(['comment:read'])]
     private ?Article $article = null;
 
     public function getId(): ?int
